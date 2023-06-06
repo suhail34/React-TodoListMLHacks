@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     env:
-      TAG: $(date %s)
+      TAG: $(date '%Y-%m-%dT%H:%M:%S')
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1

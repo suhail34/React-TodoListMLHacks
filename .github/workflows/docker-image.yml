@@ -9,12 +9,12 @@ on:
 jobs:
   build:
     env:
-      TAG: $(date '%Y-%m-%dT%H:%M:%S')
+      TAG: $(date +'%Y%m%d.%H%M%S')
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
     - name: Build and push Docker image
       run: | 
         echo "${{secrets.PASSWORD}}" | docker login -u "suhail12" --password-stdin
-        docker image build -t suhail12/mytodoapp:${{env.TAG}} .
+        docker image build -t suhail12/mytodoapp:v${{env.TAG}} .
         docker push suhail12/mytodoapp:${{env.TAG}}

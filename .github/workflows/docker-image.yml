@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build and push Docker image
-    - run: | 
+      run: | 
         echo "${{secrets.PASSWORD}}" | docker login -u "suhail12" --password --password-stdin
         docker image build -t suhail12/mytodoapp:(date %s} .
         docker push suhail12/mytodoapp:(date %s}

@@ -1,0 +1,33 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag suhail12/mytodoapp:$(date +%s)
+    - name: Copy / Push Docker tag
+      # You may pin to the exact commit or the version.
+      # uses: julb/action-copy-docker-tag@9f48ed8af75e27d6aadb81260aac09a9777d4d76
+      uses: julb/action-copy-docker-tag@v1
+      with:
+        # The Docker username.
+        username: ${{secrets.USERNAME}}
+        # The Docker password.
+        password: ${{secrets.PASSWORD}}
+        # The Docker tag to copy.
+        from: suhail12/mytodoapp:$(date +%s) # optional
+        # The Docker tags to create and push.
+#         tags: # optional
+        # A configuration file for more advanced use cases such as copying multiple sources.
+#         from-file: # optional

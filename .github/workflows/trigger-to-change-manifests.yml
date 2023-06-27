@@ -1,0 +1,26 @@
+name: Tag Change Workflow
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  check_tag_change:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Trigger Workflow in Private Repo
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          repository: suhail34/my-todo-manifests  # Replace with the owner and repository name
+          event-type: tag-change
+          client-payload: |
+            {
+              "tag_name": "${{ github.ref }}",
+              "changed_file": "path/to/changed_file"
+            }

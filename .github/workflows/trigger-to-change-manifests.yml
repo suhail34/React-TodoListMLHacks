@@ -3,7 +3,7 @@ name: Tag Change Workflow
 on:
   push:
     tags:
-      - '*'
+      - 'v*'
 
 jobs:
   check_tag_change:

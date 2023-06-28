@@ -22,5 +22,4 @@ jobs:
           client-payload: |
             {
               "tag_name": "${{ github.ref }}",
-              "changed_file": "path/to/changed_file"
             }

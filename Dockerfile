@@ -1,15 +1,9 @@
-FROM node:latest
+FROM node:latest as build
+WORKDIR /app
+ADD . .
+RUN npm install --production
 
-RUN mkdir -p /app/src
-
-WORKDIR /app/src
-
-COPY package.json .
-
-RUN npm install
-
-COPY . .
-
+FROM alpine:latest as main
+COPY --from=build /app /
 EXPOSE 3000
-
 CMD ["npm","start"]

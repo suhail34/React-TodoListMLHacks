@@ -1,7 +1,7 @@
 FROM node:latest as build
 WORKDIR /app
 ADD . .
-RUN npm install --production
+RUN npm install --omit-dev
 
 FROM alpine:latest as main
 COPY --from=build /app /
